@@ -42,5 +42,7 @@ Build the image -> docker build -t [image_name] . -> It will create the image
                   runc      runc    runc
                     | images
 
+when runc goes shim will take care, these are called daemonless containers
+
 
 
