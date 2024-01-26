@@ -1,0 +1,46 @@
+
+docker run -d -p 8080:80 nginx -> (Run nginx in detach mode (background) with exposing the port 8080 to ouside) ->port forwarding
+
+                 exposed port(container port) : default port of nginx
+
+
+docker ps -a -> show the stopped containers
+
+docker commit -m "added names.txt file" [container_id] [new image name] -> if you changed the running image and want to share with some one
+
+take the running container id and commit then it will create the new image. where you can push it to dockerhub. (preferable)
+
+docker images -q -> it will give all images id
+
+docker rmi $(docker images -q) -f -> it will remove the all non running images
+
+Docker images has layers -> which will download when you pull from dockerhub only if it is not present in your local ->
+to check it-> docker inspect [imagename]
+
+CREATING OUR ONE DOCKER IMAGE
+
+create dockerfile -> mkdir folder -> vi DockerFile
+
+FROM Ubuntu:16.1
+RUN apt-get update
+CMD ["echo", "Iranna"]
+
+save the file ->
+
+Build the image -> docker build -t [image_name] . -> It will create the image
+
+                    DOCKER ENGINE
+
+                          Docker
+                            |
+                          Daemon
+                            |
+                          ContainerD
+                            |
+                  shim     shim   shim
+                    |        |      |
+                  runc      runc    runc
+                    | images
+
+
+
