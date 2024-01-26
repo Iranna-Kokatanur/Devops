@@ -1,0 +1,20 @@
+https://www.docker.com/products/docker-desktop/
+
+Install Docker
+Windows -> Docker Desktop + WSL
+Mac -> Virtual Machines + Docker desktop
+Linux -> Docker Desktop
+
+Docker Parts:
+1) Runtime -> Basically allows us to start and stop the containers.
+            Two types : 1) runc -> start and stop the containers (Low level)
+                        2) containerd -> Managing the runc and how to interact the container with the internet (pulling the image from the internet) (High level)
+2) Engine -> to interact with the docker (Docker Daemon)
+
+          Interacting with the docker -> [Docker CLI -> Rest API -> Server Daemon -> Runtime -> create the tasks] (Client server Architecture)
+
+3) Orchestration -> 1. If you are applications are running on 10000 containers, if you want to scale it up you can increase more containers
+                    2. If the containers are got ruined, you need to restart all these containers
+                    3. If you want to make it version 01 to 02 in the containers.
+
+                    These takes will take lot of time if you do it maually, then it requires lot of monitoring. Then these orchestration tool like Kubernates comes into pic.
