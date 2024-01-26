@@ -18,3 +18,13 @@ Docker Parts:
                     3. If you want to make it version 01 to 02 in the containers.
 
                     These takes will take lot of time if you do it maually, then it requires lot of monitoring. Then these orchestration tool like Kubernates comes into pic.
+
+Docker Images: Ex: If you are cooked something, if you want to share this with someone who is living in USA. You cant share it right. Instead of that you can share the recipe of it.
+                   Like we cant share the running containers, instead of that we can share instruction to run that container called images, this can be done by docker file also.
+
+                  Images -> Just contains the instruction which helps to run the application. This can be done by DockerFile also.
+
+                  [DockerFile -> Image -> Container] (Container is the instance of Image)
+
+
+Docker Runtimes : There are so many runtimes, like crio-d, runc, containerd which one to use? Now we can use Open Container Initiative(OCI)
