@@ -1,0 +1,41 @@
+
+docker run -it [image name] -> (-it means interactive mode (means dont exit out of the container)) ->
+                                This command will run the image to form the container.
+                            -> If didnt find the image in local system then it will look for the docker hub (Docker Registry)
+
+docker pull [image name with version (not mandate)] -> It will download the image from private registry (docker registry)
+
+docker ps -> processes
+
+docker container ls -> container list
+
+docker images -> images list
+
+docker container exec -it [containerid] bash -> bash will attach to running container (docker run -it ubuntu:16.0)
+
+docker stop [container_id] -> It will stop the container
+
+docker ps -a -> show the running containers, stopped one.
+
+docker rm [container_id] -> remove the container
+
+docker inspect [container_id] -> Info of container running [container has to run for this (run in -it mode)]
+
+docker logs -> Logs
+
+docker container prune -f -> Remove all stopped containers (-f -> dont ask) -> (prune for stopped containers)
+
+docker run alpine ping www.civo.com -> Download the alpine and will ping the www.civo.com
+
+docker run -d alpine ping www.civo.com -> It will run in detach mode (means in background) -> This command will return the container id
+
+(Alpine is linux image,so we can use linux commands like ping and all)
+
+docker run ubuntu echo hey -> on ubuntu container we are calling Hey -> Prints Hey and exit out of it.
+
+docker logs --since 5s [container_id] -> logs of 5s ago
+
+docker rmi [image] alpine -f -> remove the image forcefully
+
+
+
