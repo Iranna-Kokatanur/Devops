@@ -1,0 +1,41 @@
+Kubernetes installation:
+
+1) Kubectl 
+2) Minikube (one cluster) -> control plane
+
+Install Docker desktop it will access to kubectl and Minikube or directly go for minikube.
+
+3) Kubeadm
+4) best option: cloud providers (For multinode clusters)
+
+Use CIVO -> better than AWS -> $250 free
+
+civo.com/academy ->K8s courses
+
+----------------------------------------------------------------------------
+
+Commands:
+
+1) kubectl version
+2) kubectl version --output=yaml
+3) minikube start (use docker desktop driver)
+4) minikube status
+5) kubectl get pods
+6) Kubectl get nodes
+7) Minikube dashboards -> minikube dashboard
+8) minikube docker-env
+9) docker container ls -> For docker containers list used by minikube
+10) minikube ssh -> inside minikube we have docker runtime, you can check what all runnning using [docker ps] command.
+11) kubectl config view -> about cluster
+12) kubectl config current-context
+13) kubectl get all -> it will give service, pods and everything
+
+We said deployment to run 4 pods always. Deployment is also a controller.
+
+kubectl delete pd [pod name]
+
+even if you delete the pod, it will restart the pod because initially we said api server to run 4 pods.
+
+kubectl get depolyments -> give the deployments
+
+kubectl delete deployments [deployment name] -> will delete the deployments, and related pods will also get terminated.
