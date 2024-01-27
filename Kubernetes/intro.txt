@@ -1,0 +1,83 @@
+One App on One Virtual Machine
+This is not cool for scaling. Hence the Docker.
+
+Orchestrators: Helps in Deploying And Managing the containers dynamically. (These will updates the applications or deploy without any downtime)
+And you can duplicate or replicate the applications and load balancing.
+
+-Deploy
+-Zero Downtime updates
+-scale your applications
+- Self-Heal the containers
+
+These all are cloud native applications (on Kubernetes)
+
+KUBERNETES: It is more than container orchestrator.
+
+K8s cluster : Control plane + Nodes (Virtal Machines we can consider)
+
+
+                -------------------------------------------------------------------
+Kubectl CLI     |   Control Plane  ---------------        Worker nodes
+
+                |                                          Worker nodes
+                -------------------------------------------------------------------
+
+Kubectl will communicate with control plane and ask for to run the containers. Then control plane will check for the availability of worker nodes whether they are empty or 
+able to handle the load after running the containers, based on that it will back to kubectl.
+
+To talk with control place, we have two ways : Imperative (Using commands) and Declarative (using manifests (like yaml files))
+
+It is important to use declarative way because no need to use the commands.
+
+Inside worker node -> container runtime -> pods -> Container
+
+PODS : Scheduling unit
+
+How to start with Kubernetes:
+
+1) Divide the application into microservices
+2) Containerize the microservices
+3) Put container in pods
+4) Depoly these pods to controllers to Kubernetes.
+
+
+Control Plane : 
+                        ----------------------------------------
+Kubectl --------------> |Api Server <--->  etcd (Database)
+                        |           <--->  Control Managers
+                        |           <--->  Schedular
+                        -----------------------------------------
+
+Kubectl will talk through the CLI or manifest over HTTP to Api server to create the pods or other stuff.
+
+MONOCLE -> Open Source to create the manifest files.
+
+K8s Lens: IDE (with commands I mean no yaml) -> free to use
+
+etcd -> Database -> if api server wants to make any values it will ask the etcd
+
+Controllers will help in creating the pods. But for managing the control, control managers are there.
+
+Control Managers will do these functions: (desire state of pods, Current state of running, differences, make the changes requested by client)
+
+Schedular: It is the one which schedule on worker nodes for which request got from the api server like creating the pods.
+
+Worker Node:
+
+          Api server <-----------------------> Kube-proxy
+                      <-----------------------> Kubelet -> container runtime -> pod -> container
+
+
+Kubelet will also listen to Api server -> It will allocate what api server says. If it is not able to schedule, it will back to api server, then server will talk to control managers
+and scheduler to do something further.
+
+K8s proxy -> Networking part of worker nodes. (Make worker nodes to talk to outside)
+
+
+
+
+
+                  
+
+
+
