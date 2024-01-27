@@ -73,6 +73,10 @@ and scheduler to do something further.
 
 K8s proxy -> Networking part of worker nodes. (Make worker nodes to talk to outside)
 
+Kubernetes has its own dns. 
+
+Deployment -> Pod -> container.
+
 
 
 
