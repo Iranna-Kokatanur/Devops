@@ -21,3 +21,5 @@ docker run -it imageid /bin/bash -> Intermediate terminal
 docker run -d imageid -> detached mode, generates one container id
 
 docker exec -it containerid /bin/bash or /bin/sh -> going inside the running terminal
+
+docker run -it --name Iranna [image] -> you can give the custom name to container
