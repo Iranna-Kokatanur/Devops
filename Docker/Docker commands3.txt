@@ -23,3 +23,7 @@ docker run -d imageid -> detached mode, generates one container id
 docker exec -it containerid /bin/bash or /bin/sh -> going inside the running terminal
 
 docker run -it --name Iranna [image] -> you can give the custom name to container
+
+docker run -d --name Iranna -p 9090:80 nginx:latest -> docker run -d -p [outside port: container port] image
+
+curl -X GET http://localhost:80
