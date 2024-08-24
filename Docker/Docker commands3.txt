@@ -16,7 +16,7 @@ docker restart [container]
 
 docker info 
 
-docker run -it imageid -> Intermediate terminal
+docker run -it imageid /bin/bash -> Intermediate terminal
 
 docker run -d imageid -> detached mode, generates one container id
 
