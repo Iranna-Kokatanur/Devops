@@ -27,3 +27,7 @@ docker run -it --name Iranna [image] -> you can give the custom name to containe
 docker run -d --name Iranna -p 9090:80 nginx:latest -> docker run -d -p [outside port: container port] image
 
 curl -X GET http://localhost:80
+
+docker rm [containerid] --force -> remove the container forcefully
+
+docker rmi [imageid] --force -> remove the image forcefully
