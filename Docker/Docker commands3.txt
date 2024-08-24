@@ -15,3 +15,9 @@ docker start [container]
 docker restart [container]
 
 docker info 
+
+docker run -it imageid -> Intermediate terminal
+
+docker run -d imageid -> detached mode, generates one container id
+
+docker exec -it containerid /bin/bash or /bin/sh -> going inside the running terminal
