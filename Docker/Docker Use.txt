@@ -1,0 +1,6 @@
+
+DOCKER BENEFITS:
+1. portable
+2. cost-effective
+3. Ability to run anywhere
+4. Test and rollback for deployments
