@@ -1,0 +1,17 @@
+docker login -u [username] -p [password] => Login to dockerhub by commandline
+
+docker pull [image]
+
+docker tag [imageid] [username/repository:tagname] => tag the image require to push to docker hub
+
+docker push [username/repository:tagname] => push to docker hub
+
+docker system prune -a => delete the all the images, contains, networks etc
+
+docker stop [container]
+
+docker start [container]
+
+docker restart [container]
+
+docker info 
