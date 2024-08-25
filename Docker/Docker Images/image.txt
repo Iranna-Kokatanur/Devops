@@ -11,3 +11,4 @@ ENTRYPOINT -> when container started the command in the ENTRYPOINT will run ( wh
 you can just override by giving ENTRYPOINT in docker run command)
 ARG -> image tag
 MAINTAINER -> maintainer of the image (Enterprised when you are doing for)
+VOLUME -> mount path (you can specify in docker run command also)
