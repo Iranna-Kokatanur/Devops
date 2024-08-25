@@ -37,5 +37,9 @@ docker logs --since 5s [container_id] -> logs of 5s ago
 
 docker rmi [image] alpine -f -> remove the image forcefully
 
+docker run --entrypoint whoami -t [image] -> You can change the entrypoint command
+
+docker image prune -> remove images
+
 
 
