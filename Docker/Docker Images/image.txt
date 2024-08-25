@@ -2,7 +2,7 @@
 FROM -> BASE IMAGE
 RUN -> linux commands
 ENV -> Environment variables
-EXPOSE -> Expose port
+EXPOSE -> Expose port for oontainer
 COPY -> copy the files to container
 ADD -> copy the files to container (it will uncompress the compressed files it is .zip or any compressed)
 USER -> which user when you run the container (when you go inside the container, that user will be in a shell)
