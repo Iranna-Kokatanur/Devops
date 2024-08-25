@@ -1,1 +1,13 @@
 
+FROM -> BASE IMAGE
+RUN -> linux commands
+ENV -> Environment variables
+EXPOSE -> Expose port
+COPY -> copy the files to container
+ADD -> copy the files to container (it will uncompress the compressed files it is .zip or any compressed)
+USER -> which user when you run the container (when you go inside the container, that user will be in a shell)
+CMD -> Command for starting the container
+ENTRYPOINT -> when container started the command in the ENTRYPOINT will run ( when you want to change the ENTRYPOINT for the same image, 
+you can just override by giving ENTRYPOINT in docker run command)
+ARG -> image tag
+MAINTAINER -> maintainer of the image (Enterprised when you are doing for)
