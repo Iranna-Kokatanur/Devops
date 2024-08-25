@@ -35,3 +35,7 @@ docker rmi [imageid] --force -> remove the image forcefully
 docker inspect containerid -> give the info of running container
 
 docker kill containerid -> kill the running the container
+
+docker container prune -f -> remove all the containers
+
+docker system prune -f -> remove all the image, container
