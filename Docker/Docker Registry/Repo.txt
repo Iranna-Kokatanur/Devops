@@ -1,0 +1,8 @@
+ECR -> Amazon Elastic Container Registry
+ACR -> Azure Container Registry
+GCR -> Google container Registry
+
+DockerHub
+Nexus, Jfrog
+
+Local Registry -> Add docker login of dockerhub
