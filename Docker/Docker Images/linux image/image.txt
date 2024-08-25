@@ -1,0 +1,8 @@
+docker build -f Dockerfile -t customimage .
+docker run -t customimage
+docker run -it customimage /bin/sh
+docker run --entrypoint whoami -t customimage
+docker run --entrypoint whoami -t customimage
+
+>docker run -t customimage
+Hi, Iranna. How are you?
