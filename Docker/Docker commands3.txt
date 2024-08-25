@@ -38,4 +38,4 @@ docker kill containerid -> kill the running the container
 
 docker container prune -f -> remove all the containers
 
-docker system prune -f -> remove all the image, container
+docker system prune -f -> remove all cache, container
