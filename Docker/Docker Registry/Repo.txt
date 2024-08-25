@@ -5,4 +5,6 @@ GCR -> Google container Registry -> docker tag image gcr.io/[project id]/image:t
 DockerHub  -> Add docker login of dockerhub in local to push -> docker push username/repo:tag
 Nexus, Jfrog
 
+in companies -> docke push domainname/imagename:tag
+
 Local Registry ->
