@@ -8,3 +8,9 @@ Nexus, Jfrog
 in companies -> docke push domainname/imagename:tag
 
 Local Registry -> docker run -d -p 5000:5000 --restart=always --name local-registry registry:2 (image : registry:2, 5000 - container port)
+
+make a tag of image -> docker tag 13b66b487594 localhost:5000/ubuntu:v1.0
+
+docker push localhost:5000/ubuntu:v1.0
+
+docker pull localhost:5000/ubuntu:v1.0
