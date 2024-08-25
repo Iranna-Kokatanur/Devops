@@ -31,3 +31,7 @@ curl -X GET http://localhost:80
 docker rm [containerid] --force -> remove the container forcefully
 
 docker rmi [imageid] --force -> remove the image forcefully
+
+docker inspect containerid -> give the info of running container
+
+docker kill containerid -> kill the running the container
