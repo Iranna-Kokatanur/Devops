@@ -1,8 +1,8 @@
-ECR -> Amazon Elastic Container Registry
+ECR -> Amazon Elastic Container Registry 
 ACR -> Azure Container Registry
-GCR -> Google container Registry
+GCR -> Google container Registry -> docker tag image gcr.io/[project id]/image:tag, docker push gcr.io/[project id]/image:tag
 
-DockerHub
+DockerHub  -> Add docker login of dockerhub in local to push -> docker push username/repo:tag
 Nexus, Jfrog
 
-Local Registry -> Add docker login of dockerhub
+Local Registry ->
