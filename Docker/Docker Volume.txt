@@ -6,7 +6,7 @@ docker run -it -v [docker host: container inside path] image /bin/sh
 
 1. Without login to container I can access what is inside the root
 2. Even If i loose the container the data will be there in my C:\Users\AC96810\Downloads\Docker folder
-3. It will not increase the size of the running container [ because whatever you are creating inside the running container will sit in C:\Users\AC96810\Downloads\Docker]
+3. It will not increase the size of the running container [because whatever you are creating inside the running container it will be visible, but will sit in C:\Users\AC96810\Downloads\Docker]
 4. Whatever the new files is added in the container will be present on C:\Users\AC96810\Downloads\Docker not vice versa.
 5. It is just sharing the folder of container [majorly help in recovery if i loose the container]
 6. we can share accross multiple containers by specifing path
