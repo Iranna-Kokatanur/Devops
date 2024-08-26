@@ -30,4 +30,4 @@ kube-proxy - If the container is running as a pod, you have to make it as a serv
 And it will take care the traffic for the perticular worker nodes.
 
 Container Runtime - Kubernetes will provide the more container run time like Docker, containerd, crio -> Just responsible for running the 
-container (It will responsible for recognizing the images)
+container (It will responsible for recognizing the images like which image docker any other, if it is docker has to be for this)
