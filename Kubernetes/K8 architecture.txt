@@ -1,3 +1,5 @@
+MASTER / Control plane :
+
 Kuberetes Api server / Master Api Server / Control plane Api server 
     - It will expose the Api
     - It will have the information of PODS
@@ -5,6 +7,13 @@ Kuberetes Api server / Master Api Server / Control plane Api server
 
 ETCD -> Database / Storage - It will have the complete information of Complete cluster (Key:value store)
 
-Kubernetes schedular - It will schedule the pod and decides on which instance / node the pod has to deploy. (Kubectl create or Kubectl apply it
-will go to schedular and schedular will perform his task)
+Kubernetes schedular - It will schedule the pod and decides on which instance / node the pod has to deploy. (Kubectl create or Kubectl apply it will go to schedular and schedular will perform his task)
                      - It will check highly available node and deploy the pod unless you specify the node.
+
+Control Manager - It will control the happenings in K8 cluster.
+
+1. Node Controller - It will have control over the nodes (if any issues on node)
+2. Job Controller - It will have the jobs like killing the pod, runs a pod
+3. End Point Controller - When you deploy the pod, this controller will expose that as a service (url)
+4. Service controller / Service accounts / token controller - It will have the secrets (E.g : Dockerhub credentials to pull the image)
+
