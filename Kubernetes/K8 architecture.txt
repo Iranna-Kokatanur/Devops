@@ -17,3 +17,17 @@ Control Manager - It will control the happenings in K8 cluster.
 3. End Point Controller - When you deploy the pod, this controller will expose that as a service (url)
 4. Service controller / Service accounts / token controller - It will have the secrets (E.g : Dockerhub credentials to pull the image)
 
+Cloud contorl controller 
+- He will repsonsible for service controller, route controller, node controller
+- If you are taking the any service from cloud provider, it will be aligned with external and the cluster
+- It will help in autoscaling - E.g: if your application needs more node, it will create and if there is no require of node, it will delete. 
+It will only present when you take k8 as service like AKS, GKS, EKS
+
+Worker Node:
+
+Kubelet - Agent, check whether the container running in pods or not and submit the details to etcd
+kube-proxy - If the container is running as a pod, you have to make it as a service and expose to ip for the external, that network policies it will take care.
+And it will take care the traffic for the perticular worker nodes.
+
+Container Runtime - Kubernetes will provide the more container run time like Docker, containerd, crio -> Just responsible for running the 
+container (It will responsible for recognizing the images)
