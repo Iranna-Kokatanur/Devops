@@ -1,0 +1,10 @@
+Kuberetes Api server / Master Api Server / Control plane Api server 
+    - It will expose the Api
+    - It will have the information of PODS
+    - It will control the traffic on all the worker nodes
+
+ETCD -> Database / Storage - It will have the complete information of Complete cluster (Key:value store)
+
+Kubernetes schedular - It will schedule the pod and decides on which instance / node the pod has to deploy. (Kubectl create or Kubectl apply it
+will go to schedular and schedular will perform his task)
+                     - It will check highly available node and deploy the pod unless you specify the node.
