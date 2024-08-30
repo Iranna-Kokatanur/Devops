@@ -257,8 +257,10 @@ Events:                   <none>
 
 6. kubectl delete svc <servicename>
 
+7. kubectl get svc <servicename> -o yaml
+
 32653 -> is the external port where you can get using http://machineip:30000 (you can get ip by ip addr) (30000 -> 32767 is the range actually for nodeport)
 
 But accessing with any other might be risky
 
-3. Loadbalancer will work in Cloud cluster not in Minikuber/Microk8s
+3. Loadbalancer will work in Cloud cluster not in Minikuber/Microk8s (Just change the Kind as LoadBalancer)
