@@ -1,0 +1,10 @@
+EXAMPLE:
+
+     DB Service                     Backend Service                 Front service
+
+     Database pod                   Backend pod                     Frontend pod
+
+1. How communication happens between pods in k8
+
+-> Using service names not through ip (when pod reran there is a chance of change of ip),
+in the application you need to configure the name of service (you want to use db one, add its service)
