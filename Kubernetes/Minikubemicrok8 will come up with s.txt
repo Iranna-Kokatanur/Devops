@@ -43,7 +43,7 @@ in manifest.yml)
 6. kubectl describe <podname> -n iranna
 7. kubectl logs <podname>
 8. kubectl get pods --show-labels
-
+9. kubectl logs -f <podname>
 
 Deployments:
 
