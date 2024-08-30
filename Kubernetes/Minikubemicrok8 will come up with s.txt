@@ -1,0 +1,264 @@
+Minikube/microk8 will come up with single node cluster
+
+Nodes:
+
+1. kubectl get nodes
+
+
+Namespace:
+
+
+(initially four namespace will be there)
+default   kube-node-lease   kube-public      kube-system  
+
+1. kubectl create namespace <name>
+2. kubectl delete namespace <name>
+3. kubectl get namespace
+
+
+
+Pods:
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-pod
+  labels:
+    app: example
+spec:
+  containers:
+  - name: example-container
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+
+1. kubectl apply -f manifest.yml -n <namespace> (By default namespace is default)
+2. kubectl delete pod <podname> (Once you delete the pod it will not come up, because it started as a pod of kind
+in manifest.yml)
+3. kubectl get pods -n <namespace>
+4. kubectl get pods -o wide
+5. kubectl delete pod <podname> -n <namespace>
+6. kubectl describe <podname> -n iranna
+7. kubectl logs <podname>
+8. kubectl get pods --show-labels
+
+
+Deployments:
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deployment
+  labels:
+    app: example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+      - name: example-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+1. kubectl apply -f manifest.yml -n <namespace>
+2. kubectl get deployments -n <namespace>
+3. kubectl delete deployments <deployment name> -n <namespace>
+4. Here if you delete the pod, it will again come up, because it started as a pod of kind in manifest.yml)
+5. kubectl delete -f manifest.yml -n <namespace> -> to delete the applied yml, whatever the pods or deployment created will be deleted
+6. kubectl describe deployment <deploymentname> -n <namespace>
+
+
+
+Secrets:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deployment
+  labels:
+    app: example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+      - name: example-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: mydockerhubsecret
+
+Command for secret for docker registry (k8 understand the secrets)
+
+kubectl create secret mydockerhubsecret doc-credentials \
+  --docker-server=https://index.docker.io/v1/ \
+  --docker-username=<username> \
+  --docker-password=<password> \
+  --docker-email=<mail> -n <namespace>
+
+kubectl get secrets -n <namespace>
+
+kubectl get secrets <secretname> -o yaml
+
+Add the secret mydockerhubsecret which has credentials to get the image from dockerhub / you can customize for your private registry
+
+
+
+
+
+Service:
+
+Before this application has to be deployed using kind: Depolyment or Pod
+
+If you want to access the pod to outside, you need to create service
+
+
+There are three types of service
+1. ClusterIP - It will only accessible within cluster
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+
+
+****** REMEMBER ALWAYS app label should be same in deployment and service yml file ***************
+
+1. kubectl apply -f manifest.yml -n <namespace>
+2. kubectl get svc -n <namespace>
+3. kubectl describe svc <servicename> -n <namespace>
+
+Name:              nginx-service
+Namespace:         default
+Labels:            app=nginx
+Annotations:       <none>
+Selector:          app=nginx
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.152.183.17
+IPs:               10.152.183.17
+Port:              <unset>  80/TCP
+TargetPort:        80/TCP
+Endpoints:         10.1.123.240:80,10.1.123.241:80,10.1.123.242:80 --> these are endpoints
+Session Affinity:  None
+Events:            <none>
+
+4. kubectl get svc --show-labels
+
+kubectl get svc --show-labels
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE     LABELS
+kubernetes      ClusterIP   10.152.183.1    <none>        443/TCP   3d4h    component=apiserver,provider=kubernetes
+nginx-service   ClusterIP   10.152.183.17   <none>        80/TCP    3m49s   app=nginx
+
+5.  curl -X GET http://10.152.183.17:80
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+--> Works internal only
+
+
+2. Nodeport
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000 -> It is not mandatory (The nodeport will get assign automatically)
+  type: NodePort
+
+****** REMEMBER ALWAYS app label should be same in deployment and service yml file ***************
+
+1. kubectl apply -f manifest.yml -n <namespace>
+2. kubectl get svc -n <namespace>
+3. kubectl describe svc <servicename> -n <namespace>
+
+4. kubectl get svc --show-labels
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE    LABELS
+kubernetes      ClusterIP   10.152.183.1    <none>        443/TCP        3d4h   component=apiserver,provider=kubernetes
+nginx-service   NodePort    10.152.183.17   <none>        80:30000/TCP   12m    app=nginx
+
+5. kubectl describe svc nginx-service
+Name:                     nginx-service
+Namespace:                default
+Labels:                   app=nginx
+Annotations:              <none>
+Selector:                 app=nginx
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.152.183.161
+IPs:                      10.152.183.161
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30000/TCP
+Endpoints:                10.1.123.240:80,10.1.123.241:80,10.1.123.242:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+
+6. kubectl delete svc <servicename>
+
+32653 -> is the external port where you can get using http://machineip:30000 (you can get ip by ip addr) (30000 -> 32767 is the range actually for nodeport)
+
+But accessing with any other might be risky
+
+3. Loadbalancer will work in Cloud cluster not in Minikuber/Microk8s
