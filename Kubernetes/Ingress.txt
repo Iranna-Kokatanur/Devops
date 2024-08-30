@@ -10,7 +10,68 @@ Deployment1 Deployment2  Deployment3 Deployment4
 You can deploy the application using any service like nodeport or ClusterIP. INGRESS has IP which is loadbalancer.
  When someone hit the request based on the endpoint it will go to corresponding service and pods and make a call.
 
+Sample manifest file for all Kind 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 80
+
+kubectl apply -f <manifest file name for ingress>
 
 kubectl get ingress -> It will have the loadbalancer ip, where you can access the request
 
 kubectl edit deployments <deployment name>
+
+
