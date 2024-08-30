@@ -1,0 +1,16 @@
+  User sending the request
+      INGRESS (IngressIP - Loadbalancer IP)
+
+service1    service2    service3     service4
+p1 p2 p3    p1 p2 p3     p1 p2 p3    p1 p2 p3
+
+Deployment1 Deployment2  Deployment3 Deployment4
+
+
+You can deploy the application using any service like nodeport or ClusterIP. INGRESS has IP which is loadbalancer.
+ When someone hit the request based on the endpoint it will go to corresponding service and pods and make a call.
+
+
+kubectl get ingress -> It will have the loadbalancer ip, where you can access the request
+
+kubectl edit deployments <deployment name>
