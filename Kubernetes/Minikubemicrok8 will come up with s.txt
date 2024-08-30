@@ -46,6 +46,7 @@ in manifest.yml)
 7. kubectl logs <podname>
 8. kubectl get pods --show-labels
 9. kubectl logs -f <podname>
+10. kubectl top pods -> will show the memory using by the pods
 
 Deployments:
 
@@ -280,3 +281,7 @@ HPA: (Horizontal pod autoscalar)
 Persistant volume:
 
 1. kubectl get pv
+
+replica set:
+
+1. kubectl get replicaset
