@@ -276,3 +276,7 @@ HPA: (Horizontal pod autoscalar)
 
 1. kubectl get hpa
 2. kubectl edit hpa <hpaname>
+
+Persistant volume:
+
+1. kubectl get pv
