@@ -6,5 +6,6 @@ EXAMPLE:
 
 1. How communication happens between pods in k8
 
--> Using service names not through ip (when pod reran there is a chance of change of ip),
-in the application you need to configure the name of service (you want to use db one, add its service)
+-> Using service names(because it is static) not through ip (when pod reran there is a chance of change of ip),
+in the application you need to configure the name of service (consider backend pod want to communicate with db pod one, add its db service)
+
