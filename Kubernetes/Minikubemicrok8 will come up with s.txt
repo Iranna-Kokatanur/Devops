@@ -14,7 +14,7 @@ default   kube-node-lease   kube-public      kube-system
 1. kubectl create namespace <name>
 2. kubectl delete namespace <name>
 3. kubectl get namespace
-
+4. kubectl get all -all-namespace -> it will give deployment details of all namespace
 
 
 Pods:
