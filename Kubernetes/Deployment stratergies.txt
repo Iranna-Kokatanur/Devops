@@ -1,0 +1,21 @@
+1. Rolling update
+
+Once you deployed the app in the nodes, consider you want to go for new version of the image then what you do with the same deployment name
+you can do new deployment, then what will happen the new pod which have new update will come up and other pods will go down and changes can
+be seen in the browser. (you dont need to delete the service and deployment, just apply the new yaml file with newer image)
+
+-> earlier consider v1.0 then you want to go v2.0
+
+-> kubectl apply -f new.yaml
+-> kubectl rollout status deployment <deployment name>
+-> kubectl rollout history deployment <deployment name>
+-> watch kubectl get pods
+
+-> Consider if you want to go back to previous version, you can either change yaml file with v1.0 and do apply or
+
+-> kubectl undo rollout deployment <deployment name> --to-revision 1  (revision number based on how many rollouts)
+-> This above command will make to rollback to previous version
+
+-----------> So here no require of downtime
+
+2. Blue - Green Deployment
