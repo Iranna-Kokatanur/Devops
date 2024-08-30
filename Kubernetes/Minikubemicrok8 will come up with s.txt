@@ -1,9 +1,11 @@
 Minikube/microk8 will come up with single node cluster
 
+1. kubectl get events -> give the info of all events happening in cluster
+
 Nodes:
 
 1. kubectl get nodes
-
+2. kubectl get nodes <nodename> --show-labels
 
 Namespace:
 
@@ -14,7 +16,7 @@ default   kube-node-lease   kube-public      kube-system
 1. kubectl create namespace <name>
 2. kubectl delete namespace <name>
 3. kubectl get namespace
-4. kubectl get all -all-namespace -> it will give deployment details of all namespace
+4. kubectl get all --all-namespace -> it will give deployment details of all namespace
 
 
 Pods:
@@ -77,6 +79,7 @@ spec:
 4. Here if you delete the pod, it will again come up, because it started as a pod of kind in manifest.yml)
 5. kubectl delete -f manifest.yml -n <namespace> -> to delete the applied yml, whatever the pods or deployment created will be deleted
 6. kubectl describe deployment <deploymentname> -n <namespace>
+7. kubectl edit deployment <deployment name>
 
 
 
@@ -259,8 +262,17 @@ Events:                   <none>
 
 7. kubectl get svc <servicename> -o yaml
 
+8. kubectl edit svc <servicename>
+
 32653 -> is the external port where you can get using http://machineip:30000 (you can get ip by ip addr) (30000 -> 32767 is the range actually for nodeport)
 
 But accessing with any other might be risky
 
-3. Loadbalancer will work in Cloud cluster not in Minikuber/Microk8s (Just change the Kind as LoadBalancer)
+3. Loadbalancer: will work in Cloud cluster not in Minikuber/Microk8s (Just change the Kind as LoadBalancer)
+
+
+
+HPA: (Horizontal pod autoscalar)
+
+1. kubectl get hpa
+2. kubectl edit hpa <hpaname>
