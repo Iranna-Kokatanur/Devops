@@ -119,6 +119,8 @@ kubectl create secret mydockerhubsecret doc-credentials \
   --docker-password=<password> \
   --docker-email=<mail> -n <namespace>
 
+or we can write the yml file with the kind: Secret and do kubectl apply -f <yamlname>
+
 kubectl get secrets -n <namespace>
 
 kubectl get secrets <secretname> -o yaml
