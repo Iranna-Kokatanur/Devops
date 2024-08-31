@@ -118,4 +118,8 @@ LAYER OF ABSTRACTION:
 2. Replicaset manages replica of pod 
 3. pod is an abstraction of container
 
+==============================================================================================================================
+
+
+
 
