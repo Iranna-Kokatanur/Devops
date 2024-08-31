@@ -1,1 +1,97 @@
+-> Need to enable metallb in microk8s for loadbalancer ingress
+
+-> wsl ip 
+ip addr | grep eth0
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    inet 172.28.52.113/20 brd 172.28.63.255 scope global eth0
+
+==> microk8s enable metallb
+
+give the machine ip address range -> 172.28.52.240-172.28.52.250
+
+So, enabled 
+
+==> microk8s kubectl get pods -n metallb-system
+NAME                          READY   STATUS    RESTARTS   AGE
+controller-5484c5f99f-vrg2c   1/1     Running   0          7m1s
+speaker-hzkvt                 1/1     Running   0          7m1s
+
+Create configmap for the metallb
+
+then => kubectl apply -f configmap-metallib.yml
+     => kubectl apply -f nginx-deployment.yml
+     => kubectl apply -f loadbalancer-service.yml
+
+==> microk8s kubectl get svc
+NAME            TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
+kubernetes      ClusterIP      10.152.183.1    <none>          443/TCP        5d2h
+nginx-service   LoadBalancer   10.152.183.68   172.28.52.240   80:30000/TCP   6m54s
+
+==> microk8s kubectl get pods -o wide
+NAME                                  READY   STATUS    RESTARTS   AGE   IP             NODE             NOMINATED NODE   READINESS GATES
+example-deployment-7765fffc46-8rc8l   1/1     Running   0          30m   10.1.123.204   ind-5cg9345hy1   <none>           <none>
+example-deployment-7765fffc46-jw52k   1/1     Running   0          30m   10.1.123.202   ind-5cg9345hy1   <none>           <none>
+example-deployment-7765fffc46-txwhf   1/1     Running   0          30m   10.1.123.203   ind-5cg9345hy1   <none>           <none>
+
+==> microk8s kubectl describe svc nginx-service
+Name:                     nginx-service
+Namespace:                default
+Labels:                   app=nginx
+Annotations:              <none>
+Selector:                 app=nginx
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.152.183.68
+IPs:                      10.152.183.68
+LoadBalancer Ingress:     172.28.52.240
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30000/TCP
+Endpoints:                10.1.123.202:80,10.1.123.203:80,10.1.123.204:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason        Age                  From             Message
+  ----    ------        ----                 ----             -------
+  Normal  nodeAssigned  62s (x3 over 7m47s)  metallb-speaker  announcing from node "ind-5cg9345hy1" with protocol "layer2"
+
+
+==> microk8s kubectl get all
+NAME                                      READY   STATUS    RESTARTS   AGE
+pod/example-deployment-7765fffc46-8rc8l   1/1     Running   0          32m
+pod/example-deployment-7765fffc46-jw52k   1/1     Running   0          32m
+pod/example-deployment-7765fffc46-txwhf   1/1     Running   0          32m
+
+NAME                    TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
+service/kubernetes      ClusterIP      10.152.183.1    <none>          443/TCP        5d2h
+service/nginx-service   LoadBalancer   10.152.183.68   172.28.52.240   80:30000/TCP   9m12s
+
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/example-deployment   3/3     3            3           32m
+
+NAME                                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/example-deployment-7765fffc46   3         3         3       32m
+
+
+
+==> microk8s kubectl get nodes -o wide
+NAME             STATUS   ROLES    AGE    VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION                       CONTAINER-RUNTIME
+ind-5cg9345hy1   Ready    <none>   5d2h   v1.30.4   172.28.52.113   <none>        Ubuntu 22.04.3 LTS   5.15.153.1-microsoft-standard-WSL2   containerd://1.6.28
+
+
+
+Access outside the chrome like http://172.28.52.240
+
+
+==> microk8s disable metallb
+
+
+=====================
+
+microk8s start -> cluster create
+microk8s stop -> cluster stop
+
+=====================
+
 
