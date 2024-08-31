@@ -25,6 +25,12 @@ REDDIS client:
 docker run -it --network webapp-network redis redis-cli -h redis -p 6379
 
 docker-compose ps
+
+     Name                    Command               State                    Ports
+---------------------------------------------------------------------------------------------------
+irannak_redis_1   docker-entrypoint.sh redis ...   Up      0.0.0.0:6379->6379/tcp,:::6379->6379/tcp
+irannak_web_1     /docker-entrypoint.sh ngin ...   Up      0.0.0.0:80->80/tcp,:::80->80/tcp
+
 docker-compose down
 
 If it is giving the error kill the existing container and remove the containers
@@ -37,3 +43,9 @@ docker-compose up --build -d
 docker-compose logs
 
 docker inspect <container_id_or_name>
+
+docker ps
+
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+e06dfc8c558b   nginx:latest   "/docker-entrypoint.…"   16 minutes ago   Up 16 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp           irannak_web_1
+4160f3bbfa48   redis:latest   "docker-entrypoint.s…"   16 minutes ago   Up 16 minutes   0.0.0.0:6379->6379/tcp, :::6379->6379/tcp   irannak_redis_1
