@@ -46,4 +46,10 @@ docker logs <containerid>
 
 docker network ls (give the docker network)
 
+docker network create <name>
+
+=> When you want the container to be in same network 
+
+like docker run -it --network <networkname> busybox echo hello-world
+
 
