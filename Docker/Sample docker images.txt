@@ -1,0 +1,3 @@
+docker pull nginx:latest
+docker pull ubuntu:trusty
+docker pull ubuntu:latest
