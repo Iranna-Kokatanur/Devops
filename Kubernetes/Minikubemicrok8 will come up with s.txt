@@ -47,6 +47,7 @@ in manifest.yml)
 8. kubectl get pods --show-labels
 9. kubectl logs -f <podname>
 10. kubectl top pods -> will show the memory using by the pods
+11. kubectl exec -it <podname> -- /bin/bash -> login to pod
 
 Deployments:
 
