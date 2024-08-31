@@ -112,3 +112,10 @@ We can commnunicate with api server by using k8 api, ui or kubectl client.
 
 ===================================================================================================================================
 
+LAYER OF ABSTRACTION:
+
+1. Deployment manages replicaset
+2. Replicaset manages replica of pod 
+3. pod is an abstraction of container
+
+
