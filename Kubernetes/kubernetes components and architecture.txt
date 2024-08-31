@@ -70,3 +70,38 @@ Worker machine in K8 cluster:
 
 -------------------------------------------------------------------------------------------------------------------------------------
 =====================================================================================================================================
+
+Master node:
+
+1. Api server -> When user want to deploy the application, he has to interact with the api server. It is cluster gateway.
+It is the gatekeeper kind of for autorized requests. User can query for the resources and other stuffs using k8 client.
+request -> api server -> validate request -> other processes
+
+2. schedular -> When you want to create a new pod, api server will communicate with schedular. schedular will decide how much to 
+load resources on each node and where to deploy the pod. It will just decide on which node the new pod to be put.
+
+3. Controller manager -> It will have the cluster state means it detects the cluster changes. Consider example, if the pod is died, it will communicate the schedular to reschedule it again (based on resources schedular will decide where to deploy). 
+Controller manager -> schedular -> kubelet
+
+4. etcd -> It is the cluster brain. Cluster changes will stored in key value pair. What is cluster health and what resources are available
+and did the cluster state change. It will have these information. *** It will not have the application data ***
+
+In general master node will be multiple in cluster, api server will be loadbalanced.
+
+==> How to setup it?
+1. get new bare server
+2. add the master/worker node processes
+3. add it to the cluster
+
+production cluster setup =>
+
+        master  master
+--------------------------
+ |     |    |    |     |
+node node node node node
+
+
+==================================================================================================================================
+
+
+
