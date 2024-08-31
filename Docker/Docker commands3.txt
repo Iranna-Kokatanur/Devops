@@ -43,3 +43,7 @@ docker system prune -f -> remove all cache, container
 docker container remove 0afec856659e --force
 
 docker logs <containerid>
+
+docker network ls (give the docker network)
+
+
