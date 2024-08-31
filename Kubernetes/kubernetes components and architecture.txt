@@ -1,0 +1,72 @@
+pod
+service
+ingress
+volumes 
+configmap
+secrets
+statefulset
+deployment
+
+Pod ->
+-> Abstraction over container
+-> It will create layer on container, it will abstract the container runtime so that you can replace them or you dont have to run with any
+container tool like docker. Means you can interact with kubernetes layer
+-> Usually one application per pod
+-> each will get its own get ip(internal)
+-> This can die very easily
+-> new ip when new pod created
+-> when two pods wants to communicate, if they are communicating through ip then when pod dies it will loose ip and come up with new ip,
+so, because of that pod will use service for communication
+
+Ingress ->
+It will make the external connection with the service to interact with the pods
+
+Ingress -> service -> node -> pod
+
+Configmap ->
+
+It wil have the configuration of the application. Consider if the url changes in the application,
+you dont need to rebuild the application. you can just add in configmap because it will directly with the config map.
+
+Secrets -> 
+It will the secrets like consider dockerhub url and username and password
+
+Volumes ->
+
+Physical hardware mounting with pod so that if pod destroys no loosing of data
+
+How zero down time will happen?
+Service can two methods: Own can permanent ip or loadbalancer.
+the replicas of has to be deployed in multiple nodes or single node. If the pod is the down, service will route the traffic to other.
+this will happen by Deployments
+
+Deployments (abstraction of pods) ->
+It will create more replicas, if pod down, it will make it to spin up again.
+
+StatefulSet -> It is same like Deployments which will help for replicas of pods and autoscaling. It is basically for 
+databases. (Databases should be created using statefulset only due to data consistancy). 
+
+----Databases will never be replica using Deployment because 
+database has a state which pods are writing or reading, it will have data inconsistancy. So, either it will happen by statefulset or keep 
+the db outside k8 cluster.
+
+Stateful can't be easy so mostly databases will be kept outside k8 cluster in general.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+
+Worker machine in K8 cluster:
+
+-> Multiple nodes
+-> each nodes has multiple pods in it.
+-> 3 processes must be installed in every nodes
+     1. container runtime
+     2. kubelet -> interacts with container runtime and the worker node. It start the pod with container inside and it will assign 
+        the resources from node to the container.
+     3. kube-proxy -> It will forward the request perfectly and avoid the network overhead . (Example if the db running making request to one
+      pod, it will make the forward the request to same node instead of other node)
+-> the communication between the pods will happen through the services.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+=====================================================================================================================================
