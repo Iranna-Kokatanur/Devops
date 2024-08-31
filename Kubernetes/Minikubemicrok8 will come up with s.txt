@@ -288,3 +288,9 @@ Persistant volume:
 replica set:
 
 1. kubectl get replicaset
+
+ConfigMap:
+
+-> Here you can keep common configuration like database URL and password and all
+
+Kind : Secret 
