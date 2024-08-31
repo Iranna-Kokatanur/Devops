@@ -1,3 +1,38 @@
+
 docker-compose -f docker-compose.yml up -d
+
+docker run -it <nginxcontainerid> /bin/bash
+
+>> cd /usr/share/index/html
+>> echo '<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Nginx!</title>
+</head>
+<body>
+    <h1>Hello, Docker Compose!</h1>
+</body>
+</html>' > html/index.html
+
+>> curl -X GET http://localhost:80
+>> exit
+
+curl -X GET http://localhost
+
+REDDIS client:
+
+docker run -it --network webapp-network redis redis-cli -h redis -p 6379
+
 docker-compose ps
 docker-compose down
+
+If it is giving the error kill the existing container and remove the containers
+and run docker-compose
+
+docker-compose --version
+
+docker-compose up --build -d
+
+docker-compose logs
+
+docker inspect <container_id_or_name>
