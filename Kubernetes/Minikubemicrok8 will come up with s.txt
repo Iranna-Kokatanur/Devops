@@ -40,7 +40,7 @@ spec:
 2. kubectl delete pod <podname> (Once you delete the pod it will not come up, because it started as a pod of kind
 in manifest.yml)
 3. kubectl get pods -n <namespace>
-4. kubectl get pods -o wide
+4. kubectl get pods -o wide -> give the more info about the pod like ip
 5. kubectl delete pod <podname> -n <namespace>
 6. kubectl describe <podname> -n iranna
 7. kubectl logs <podname>
