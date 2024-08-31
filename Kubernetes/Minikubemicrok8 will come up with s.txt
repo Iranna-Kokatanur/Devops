@@ -293,4 +293,5 @@ ConfigMap:
 
 -> Here you can keep common configuration like database URL and password and all
 
-Kind : Secret 
+Kind : ConfigMap
+kubectl get configmap -o yaml
