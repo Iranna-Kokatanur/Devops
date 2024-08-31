@@ -103,5 +103,12 @@ node node node node node
 
 ==================================================================================================================================
 
+Minikube -> Master and worker processes on one machine. Docker runtime preinstalled
+-> it will create the virtual box on laptop and the node will run in that.
+-> 1 node k8 cluster.
+-> minikube has a kubectl dependency.
 
+We can commnunicate with api server by using k8 api, ui or kubectl client.
+
+===================================================================================================================================
 
