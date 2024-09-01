@@ -257,4 +257,56 @@ It will pass the request from outside to specified path.
 
 ================================================================================================================
 
+HELM:
 
+Packet manager for k8 cluster and distribute them in public and private registry.
+
+===============================================================================================================
+
+VOLUMES:
+
+===============================================================================================================
+
+STATEFULSET:
+
+Like databases -> Which have data storage to track the track of the data. (Kind: StatefulSet)
+
+And stateless handled by kind: Deployment
+
+-> In stateful, the pods will not have the same access or permissions on the db pods. There will be one master pod which will write and
+other are worker which will read the data. And all worker do not use physical storage, they have their own replica. So, they need synchronizing the data required. Master is the one allow to change the data, so, slaves need to know about this change and up to data.
+
+-> But when the cluster or pods died we will loose the data. So, persistant volume is required. So, volume should be set for statefulset.
+And each pods its own storage it can have its own volume.
+
+-> And volume can be remote storage. because local one will be for specific pod or node.
+
+-> Here next pod created only when previous one created and running
+
+-> And here deletion will happen from last pod. (Deployment will have random hash)
+
+-> the pod will be deleted when the next to it is deleted correctly and successfully.
+
+-> predictable pod name or fixed pod name and fixed individual dns name
+
+-> it is sticky. When pod dies it will have its state and its role and its recreated.
+
+-> Stateful are not perfect for containerized environments
+
+
+=================================================================================================================
+
+Services:
+
+Each pod is having its own ip address. When pod dies, it comes up with another ip. To have stable ip and as pods are multiple, to have
+loadbalancing Services are used.
+
+1. Stable ip address
+2. load balancing 
+3. loose coupling
+4. within and outside the cluster
+
+Type of services;
+
+1. ClusterIP -> it is default,
+2. Headless -> Client wants to talk to one node directly, stateful transactions like database.
