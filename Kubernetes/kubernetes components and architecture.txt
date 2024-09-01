@@ -175,3 +175,74 @@ each namespace should have its own configmaps to access the db and incase of sec
   => kubectl api-resources --namespaced=true (it will give the resources of different namespaces)
 
 4. Component if you dont specify will be created in default namespace.
+
+
+
+======================================================================================================================
+
+INGRESS:
+
+when you want to access from domain name from outside you can use this.
+
+In yaml file 
+-> kind: Ingress and add the paths
+-> the service associated 
+-> service port
+-> host (valid domain name) must mapped to node's ip address which is the entry point
+->  Internal service will be of ClusterIP not 
+nodeport and loadbalancer.
+-> Ingress controller pod must be installed separately
+
+Ingress controller -> It will evaulate all the rules (because there may be many ingress service), managed redirections. And this is the entrypoint to controller
+-> There are third party to install it or we have k8s only nginx-ingress controller.
+
+Ingress Controller pod
+|
+Myapp - ingress -->  my-app service --> my-app pod 
+
+===============================================================================================================
+
+INBUILT nginx-ingress
+
+=> microk8s enable ingress
+=> microk8s kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   5d14h
+ingress           Active   2m23s
+iranna            Active   3d22h
+kube-node-lease   Active   5d14h
+kube-public       Active   5d14h
+kube-system       Active   5d14h
+
+=> microk8s kubectl get all -n ingress
+NAME                                          READY   STATUS    RESTARTS   AGE
+pod/nginx-ingress-microk8s-controller-d2n7v   1/1     Running   0          3m3s
+
+NAME                                               DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/nginx-ingress-microk8s-controller   1         1         1       1            1           <none>          3m3s
+
+=> microk8s kubectl get pods -n ingress
+NAME                                      READY   STATUS    RESTARTS   AGE
+nginx-ingress-microk8s-controller-d2n7v   1/1     Running   0          17m
+
+=> microk8s kubectl get nodes -o wide
+NAME             STATUS   ROLES    AGE     VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION
+        CONTAINER-RUNTIME
+ind-5cg9345hy1   Ready    <none>   5d15h   v1.30.4   172.28.52.113   <none>        Ubuntu 22.04.3 LTS   5.15.153.1-microsoft-standard-WSL2   containerd://1.6.28
+
+=> microk8s kubectl logs -n nginx-deployment.yml
+=> microk8s kubectl apply -f clusterip-service.yml 
+=>  microk8s kubectl apply -f nginx-ingress.yml (these are in loadbalancer folder)
+
+=> logs : microk8s kubectl logs -n ingress nginx-ingress-microk8s-controller-d2n7v -f
+
+=> microk8s kubectl get ingress
+NAME            CLASS    HOSTS         ADDRESS     PORTS   AGE
+nginx-ingress   public   nginx.local   127.0.0.1   80      15m
+
+
+in /etc/hosts => node internal ip (172.28.52.113) and add nginx.local domain name and access in browser
+
+===================================================================================================================
+
+
