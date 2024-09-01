@@ -240,6 +240,8 @@ ind-5cg9345hy1   Ready    <none>   5d15h   v1.30.4   172.28.52.113   <none>     
 NAME            CLASS    HOSTS         ADDRESS     PORTS   AGE
 nginx-ingress   public   nginx.local   127.0.0.1   80      15m
 
+=> microk8s describe ingress <ingress name>
+
 
 in /etc/hosts => node internal ip (172.28.52.113) and add nginx.local domain name and access in browser
 
