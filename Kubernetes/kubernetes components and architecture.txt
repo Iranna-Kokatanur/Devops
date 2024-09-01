@@ -122,6 +122,56 @@ LAYER OF ABSTRACTION:
 
 ==============================================================================================================================
 
+NAMESPACE:
+
+-> Organise resources in namespace
+-> Virtual cluster inside the cluster
+
+4 namespaces by default:
+
+1.  kube-system : These will have system-processes
+2.  kube-public : publically accessible data and configmap which contains cluster information (kubectl cluster-info
+3.  kube-node-lease : It will have information about heartbeat of nodes and each node has associated lease object in namespace and 
+    determines the availability of a node
+4. default : resources you create are located here
+
+Uses:
+
+1. Resources grouped in one namespace
+2. Conflicts: many teams, same application - (If other teams have almost same configuration, their deployment might replaces another teams if they are in namespace so, better to create namespace)
+3. Resource sharing: staging and development - reuse the components in both environment (like nginx-Ingress, ElasticStack and can use for dev and prod in same cluster)
+
+        Staging               Development
+        nginx-Ingress         Elastic Stack
+
+Here staging and development envs can use common nginx and Elastic Stack
+
+4. Resource Sharing - Blue green deployment - Means two production blue (current version) and production green (next version of production) in same cluster can use the same resources like nginx-Ingress and ElasticStack
+
+5. Access and resource limits on namespace - Like if both teams are working on same cluster, having the separate namespaces for each team development will be good because there is no accidental delete or edit happen for other teams work because it is in other namespace
+which other team dont have access.
+
+(you can set cpu and ram level in namespace)
 
 
+Characteristics of namespaces -
 
+1. you can't access the most resources from another namespace - Like consider if the two different namespace is calling same db service,
+each namespace should have its own configmaps to access the db and incase of secrets also.
+
+    namespace1                namespace2
+    configmap1                configmap2
+    secret1                   secrte2
+     |-----------|----------------|
+                 |
+              Db Service
+ 2. Access service in another service - you can access the other namespace service like specifing the namespace in configmap etc
+
+   like my-sqlservice.namespace 
+
+3. Components can't be created within a namespace - volume and nodes, these are accessible across the cluster
+   if you want to access those,
+  => kubectl api-resources --namespaced=false
+  => kubectl api-resources --namespaced=true (it will give the resources of different namespaces)
+
+4. Component if you dont specify will be created in default namespace.
