@@ -247,4 +247,14 @@ in /etc/hosts => node internal ip (172.28.52.113) and add nginx.local domain nam
 
 ===================================================================================================================
 
+Use cases :
+
+It will pass the request from outside to specified path.
+
+1. Multiple path for same host => like same domain name, you just need to define path and service ingress yaml file
+2. multiple subdomains or domains
+3. It can handle https request => we can configure tls cert using secret
+
+================================================================================================================
+
 
