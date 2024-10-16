@@ -1,1 +1,14 @@
 
+ 1520  docker ps -a
+ 1521  docker images
+ 1522  docker rmi python
+ 1523  sudo docker build -f Dockerfile -t python:latest .
+ 1524  vi Dockerfile
+ 1525  vi requirement.txt
+ 1526  sudo docker build -f Dockerfile -t python:latest .
+ 1527  docker ps -a
+ 1528  docker run -t python
+ 1529  docker run -t -p 5000:5000 python
+ 1530  docker ps
+ 1531  docker ps -a
+ 1532  docker start fc8a2c5c5560 && docker logs fc8a2c5c5560 -f
